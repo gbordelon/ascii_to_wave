@@ -321,7 +321,7 @@ def out_to_file(c):
     return sounds[tones[ind]].get_raw()
 
 def prepare_wave_writer(wav_file):
-    return lambda c: sfile.writeframesraw(out_to_file(c))
+    return lambda c: wav_file.writeframesraw(out_to_file(c))
 
 if __name__ == '__main__':
     in_file_name = sys.argv[1]
@@ -332,6 +332,6 @@ if __name__ == '__main__':
                 sfile.setframerate(sample_rate)
                 sfile.setnchannels(num_channels)
                 sfile.setsampwidth(2)
-                read_file(in_file_name, prepare_wave_writer(out_to_file))
+                read_file(in_file_name, prepare_wave_writer(sfile))
     else:
         read_file(in_file_name, out_to_speaker)
